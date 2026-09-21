@@ -1,0 +1,20 @@
+# dependencies & builds
+node_modules/
+dist/
+build/
+.pio/
+.vscode/
+
+# secrets — never commit
+.env
+.env.*
+!.env.example
+esp32/src/secrets.h
+
+# misc
+*.log
+.DS_Store
+
+# Compiled host tests
+esp32/test/schedule_logic_test
+esp32/test/gate_test

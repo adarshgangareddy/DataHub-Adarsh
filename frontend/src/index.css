@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* Visual language: an industrial control panel. Concrete-grey ground, white instrument panels,
+   dark slate ink, one action blue, and hazard yellow reserved for "the gate is moving". */
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-ground: #e3e6e8;
+  --color-panel: #fafbfb;
+  --color-recess: #eef0f1;
+  --color-line: #c1c8cd;
+  --color-ink: #1d2830;
+  --color-muted: #52606a;
+  --color-steel: #1f4d80;
+  --color-steel-deep: #163a62;
+  --color-go: #1b6b40;
+  --color-go-soft: #dcefe3;
+  --color-warn: #7d5200;
+  --color-warn-soft: #f7ebc9;
+  --color-stop: #a02419;
+  --color-stop-soft: #f6dcd8;
+  --color-hazard: #f0b400;
+}
+
+@layer base {
+  html {
+    background: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.5;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-steel);
+    outline-offset: 2px;
+  }
+  button,
+  select,
+  input {
+    font: inherit;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+/* The one distinctive element: the gate position gauge. */
+.hazard {
+  background: repeating-linear-gradient(-45deg, var(--color-hazard) 0 8px, var(--color-ink) 8px 16px);
+  background-size: 22.63px 22.63px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hazard-moving {
+    animation: hazard-scroll 0.9s linear infinite;
+  }
+  .gauge-marker {
+    transition: left 0.8s ease-in-out;
+  }
+}
+@keyframes hazard-scroll {
+  to {
+    background-position: 22.63px 0;
+  }
+}
+
+.unknown-fill {
+  background: repeating-linear-gradient(90deg, var(--color-line) 0 6px, transparent 6px 12px);
+}
+
+dialog::backdrop {
+  background: rgb(29 40 48 / 0.55);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hazard-reverse {
+    animation-direction: reverse;
+  }
+}
